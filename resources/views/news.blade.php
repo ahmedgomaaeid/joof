@@ -29,8 +29,8 @@
 </style>
 
 <div id="loader" class="loading" style="visibility: visible; opacity: -0.04; display: none;">
-    <div id="loader-logo" class="animate__fadeOutLeft"><img src="/fileadmin/last-templates/images/logo.svg" alt=""></div>
-    <img id="loader-bar" class="animate__zoomOut" src="/fileadmin/last-templates/images/three-dots.svg">
+    <div id="loader-logo" class="animate__fadeOutLeft"><img src="{{route('index')}}/../webassets/imgs/logo.svg" alt=""></div>
+    <img id="loader-bar" class="animate__zoomOut" src="{{route('index')}}/../webassets/imgs/three-dots.svg">
 </div>
 
 <div class="forum-page">
@@ -143,8 +143,9 @@
     </div>
 </div>
 
-<script src="/fileadmin/last-templates/js/bundle.js"></script>
-<script src="/fileadmin/last-templates/js/jquery.min.js"></script>
+<script src="{{route('index')}}/../webassets/js/bundle.js.download"></script>
+
+<script src="{{route('index')}}/../webassets/js/script.js.download" type="text/javascript"></script>
 
 <script>
     let mybutton = document.getElementById("myBtn");
@@ -212,7 +213,6 @@
 
 </script>
 
-<script src="/typo3conf/ext/content_rating_extbase/Resources/Public/script.js?1653394426" type="text/javascript"></script>
 
 
 

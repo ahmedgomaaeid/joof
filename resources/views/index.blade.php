@@ -48,7 +48,7 @@
             <div class="appbar dark-mode">
                 <div class="trailing">
                     <!-- Menu Icon -->
-                    <div class="g-icon flip-icon" onclick="popup(1)">
+                    <div class="g-icon flip-icon" onclick="popup(1)" style="display:none;">
                         <img class="dark" src="{{route('index')}}/../webassets/imgs/menu_white.svg">
                         <img class="normal" src="{{route('index')}}/../webassets/imgs/menu.svg">
                     </div>
