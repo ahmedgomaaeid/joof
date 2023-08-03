@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)https://chatbot.ju.edu.sa/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>JU-chatbot</title>
+
+
+
+  <!-- Adress bar color -->
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#0f5203">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#0f5203">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#0f5203">
+  <!-- End Adress bar color -->
+
+
+<link rel="icon" href="https://chatbot.ju.edu.sa/favicon.png">
+<script src="./jquery-3.5.1.js.download"></script>
+
+<script src="./popper.min.js.download"></script>
+<script src="./bootstrap.min.js.download"></script>
+<link href="./bootstrap.min(1).css" rel="stylesheet">
+<link href="./bundle(1).css" rel="stylesheet">
+<style>
+.chat-page{
+   direction: rtl;
+}
+
+.chat-body{
+	flex: 1;
+	display: flex;
+    flex-flow: column;
+	overflow-y: scroll;
+    position: relative;
+    height: 26em;
+}
+
+.chat-body .chat-chat {
+    display: flex;
+    flex-flow: column;
+    row-gap: 0.875em;
+    padding: 8px;
+    flex: 1;
+    overflow: auto;
+}
+
+.chat-body .chat-chat .bot-chat {
+    color: white;
+    justify-content: flex-end;
+}
+
+.chat-body .chat-chat .bot-chat, .chat-body .chat-chat .user-chat {
+    display: flex;
+    column-gap: 0.5em;
+    align-items: center;
+}
+
+.chat-body .chat-chat .bot-chat img {
+    align-self: flex-end;
+}
+.chat-body .chat-chat .bot-chat img {
+    order: 2;
+}
+
+.chat-body .chat-chat .bot-chat .group-messages, .chat-body .chat-chat .user-chat .group-messages {
+    display: flex;
+    flex-flow: column;
+    row-gap: 8px;
+    font-size: 0.875em;
+    line-height: 1.25em;
+}
+
+
+.chat-body .chat-chat .bot-chat .group-messages, .chat-body .chat-chat .user-chat .group-messages {
+    max-width: 270px;
+	text-align: justify;
+}
+
+.chat-body .chat-chat .user-chat .group-messages div:last-child {
+    border-bottom-right-radius: 0px;
+}
+
+.chat-body .chat-chat .user-chat .group-messages div {
+    background: #F8F8F8;
+    border: 1px solid #caced4;
+}
+.chat-body .chat-chat .bot-chat .group-messages div, .chat-body .chat-chat .user-chat .group-messages div {
+    padding: 8px 10px;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.chat-body .chat-chat .bot-chat .group-messages div:last-child {
+    border-bottom-left-radius: 0px;
+}
+
+.chat-body .chat-chat .bot-chat .group-messages div {
+    background: #0f5203;
+}
+
+.chat-send {
+    box-shadow: 0px -3px 6px rgba(129, 142, 161, 0.16);
+    background: #F8F8F8;
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.chat-send .icon {
+    cursor: pointer;
+}
+
+.chat-send input {
+    background: #F8F8F8;
+    font-size: 0.875em;
+    font-weight: normal;
+    color: #677071;
+    outline: 0;
+}
+
+.chat-send input {
+    font-family: neosans;
+    font-weight: 500;
+    font-size: 0.75em;
+    border: none;
+    padding: 1em;
+    background-color: rgba(103, 112, 113, 0.11);
+    width: 100%;
+    border-radius: 0.25em;
+}
+
+.chat-send .send-message:hover {
+    background: #caced4;
+}
+
+.chat-send .send-message {
+    border: 0;
+    outline: 0;
+    width: 66px;
+    height: 33px;
+    font-family: neosans;
+    font-size: 0.875em;
+    color: white;
+    border-radius: 8px;
+    background: #0f5203;
+}
+</style>
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1117.0" data-gr-ext-installed="">  
+
+   <div class="chat-page"> 
+     
+   <div class="chat-body">
+		  <div class="chat-chat form">
+		 
+            <!-- bot -->
+            <div class="bot-chat">
+              <img src="./avater2.svg" class="img">
+              <div class="group-messages">
+                <div>مرحبا , كيف يمكننا مساعدتك</div>
+              </div>
+            </div>
+            <!-- end bot -->
+          </div>
+		</div>
+		 
+          <div class="chat-send">
+            <div class="icon"><img src="./attachment.svg"></div>
+			
+            <input type="text" id="data" size="250" class="chat-message-box" placeholder="اكتب رسالتك هنا" autocomplete="off" onkeypress="return /[0-9a-zA-Zا-ي]/i.test(event.key)" onselectstart="return false" onpaste="return false;" oncopy="return false" oncut="return false" ondrag="return false" ondrop="return false">
+            <button type="submit" id="send-btn" class="send-message">
+             ارسال
+            </button>
+          </div>
+		 
+		  
+        <!-- End chat -->
+		
+		
+		
+		  </div>
+
+     <script>
+        $(document).ready(function(){
+            $("#send-btn").on("click", function(){
+                $value = $("#data").val();
+                $msg = '<div class="user-chat"><div class="group-messages"><div>'+ $value +'</div></div></div>';
+                $(".form").append($msg);
+                $("#data").val('');
+                
+                // start ajax code
+                $.ajax({
+                    url: 'message.php',
+                    type: 'POST',
+                    data: 'text='+$value,
+                    success: function(result){
+                        $replay = '<div class="bot-inbox inbox"><div class="msg-header"><p>'+ result +'</p></div></div>';
+                        $(".form").append($replay);
+                        // when chat goes down the scroll bar automatically comes to the bottom
+                        $(".form").scrollTop($(".form")[0].scrollHeight);
+                    }
+                });
+            });
+        });
+    </script> 
+	
+
+  
+  <script src="./bundle.js(1).download"></script>
+  
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
